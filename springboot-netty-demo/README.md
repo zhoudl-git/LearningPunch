@@ -1,4 +1,4 @@
-### Netty相关API介绍
+### Netty相关API介绍（一）
 
 #### 使用 JDK API 实现一个简单的客户端服务端数据传输案例
 
@@ -149,6 +149,8 @@
 
 - 缺点 ：使用了OIO 会造成阻塞 从而降低了资源利用率
 
+- ##### NIO （非阻塞方式，非Netty方式）
+
 
 ```java
 import java.io.IOException;
@@ -254,8 +256,6 @@ public class DataTransmissionServerNioByJDKTest {
     }
 }
 ```
-
-##### NIO （非阻塞方式，非Netty方式）
 
 
 

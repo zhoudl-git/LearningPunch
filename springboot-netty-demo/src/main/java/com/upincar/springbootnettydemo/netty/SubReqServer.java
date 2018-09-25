@@ -88,7 +88,7 @@ public class SubReqServer {
     }
 
     public static void main(String[] args){
-        int nPort = 8082;
+        int nPort = 10086;
         nPort = Integer.valueOf(nPort);
         System.out.println("---------------服务端开始启动----------------");
         try {

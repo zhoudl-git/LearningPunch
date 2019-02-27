@@ -3,8 +3,7 @@
 >  如何写一个方法交换两个 Integer 类型的值？
 
 当时心里一惊，这是把我当小白了呀！交换两个数的值还不容易么，最简单的直接搞一个中间变量，然后就可以交换了... ...
-
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A96171E.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112224700.jpg)
 
 面试官随即拿出一张雪白雪白的 A4 纸
 
@@ -16,7 +15,7 @@
 
 于是乎，提起笔，奋笔疾书，唰唰唰不到两分钟，我就写完了。
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A623CD3.gif)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112248937.gif)
 
 代码如下：
 
@@ -49,7 +48,7 @@ public static void swap(Integer i, Integer j) {
 
 喂，醒醒，想啥呢
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A6148FE.gif)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112310576.jpg)
 
 面试官瞄了一眼代码之后开始发问呢。
 
@@ -58,8 +57,7 @@ public static void swap(Integer i, Integer j) {
 我的天呐，难道有问题，多年面试经验告诉我，面试重音提问要不就是在故意混淆，要不就是在善意提醒你，看能不能挖掘出点其他技术深度出来。
 
 所以根据面试官的意思肯定是使用这段代码不能交换呢，哪么不能交换的原因在哪里？
-
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A65F893.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112323564.jpg)
 
 首先，想了下，要交换两个变量的值，利用中间变量这个思路是不会错的。既然思路没错，哪就要往具体实现上想，问题出在哪里。
 
@@ -85,7 +83,7 @@ public static void swap(Integer i, Integer j) {
 
 难道问题出在这个地方？
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A6C047D.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112339991.jpg)
 
 可是 Integer 不就是 **引用类型**？
 
@@ -113,8 +111,7 @@ private final int value;
 简单理解就是上面的 swap 方法其实真实交换的是 两个形参 i 和 j 的值，而没有去改变 a 和 b 的值
 
 画个图简单理解一下：
-
-![1550743408843](C:\Users\DELL\AppData\Roaming\Typora\typora-user-images\1550743408843.png)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112438142.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pCeWxhbnQ=,size_16,color_FFFFFF,t_70)
 
 **哪如何去改变这个 value 值呢 ?**
 
@@ -142,7 +139,7 @@ public static void swap(Integer i, Integer j) throws NoSuchFieldException, Illeg
 
 白纸只能靠你自己脑子想，脑子编译，脑子运行（当然运行不好可能就烧坏了）
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2A8347C0.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112458614.jpg?x-oss-process=image/watermark,type_ZmFuZ3poZW5naGVpdGk,shadow_10,text_aHR0cHM6Ly9ibG9nLmNzZG4ubmV0L1pCeWxhbnQ=,size_16,color_FFFFFF,t_70)
 
 果然，查出问题来了（还好够机智）
 
@@ -222,7 +219,7 @@ private static void setAccessible0(AccessibleObject obj, boolean flag)
 
 看着这段代码乐开了花，心里想着这下应该总能交换了吧，我又非常自信的把代码递给了面试官
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2AA37879.gif)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112519317.gif)
 
 > 面试官：为什么要这么改？为什么要使用反射？为什么要加这行 setAccessible(true) ？
 
@@ -324,7 +321,7 @@ System.out.println(a == b);
 
 这个结果输出肯定是 `false`，因为根据前边`Integer。valueOf()`实现的源码可以得到：超过-128-127的值需要重新 `new Integer(i)`,但凡是 `new` 出来的，使用 `==` 比肯定是 `false`
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2AB55D19.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112542376.jpg)
 
 
 
@@ -349,7 +346,7 @@ public static void swap(Integer i, Integer j) throws NoSuchFieldException, Illeg
 
 **综上：我们就搞清楚了为什么面试官会说结果是 a = 2, b = 2 .**
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2AC85BC5.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112553631.jpg)
 
 既然分析出了为什么会变成 a = 2 b = 2，哪就好办呢。
 
@@ -388,7 +385,7 @@ public static void swap(Integer i, Integer j) throws NoSuchFieldException, Illeg
 
 靠着脸厚，我第三次把代码交给了面试官，没办法，厚度不是你所能想象的... ...
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2AD6061F.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/2019022211260537.jpg)
 
 
 
@@ -407,7 +404,7 @@ public static void swap(Integer i, Integer j) throws NoSuchFieldException, Illeg
 
 有没有不总结不知道，一总结吓一跳的感觉，这么一道看似简单的题，竟然考察到了这么多东西
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2ADF46D6.jpg)
+![在这里插入图片描述](https://img-blog.csdnimg.cn/20190222112736939.jpg)
 
 > 面试官：好了，技术问题我们今天就先面到这里，接下来能否说一说你有什么长处？
 >
@@ -417,6 +414,8 @@ public static void swap(Integer i, Integer j) throws NoSuchFieldException, Illeg
 >
 > 我：什么时候开始上班？
 
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2AEB48FE.jpg)
-
-![img](file:///C:\Users\DELL\AppData\Local\Temp\SGPicFaceTpBq\61420\2E34A9E0.jpg)
+>
+>Github地址：https://github.com/Bylant/LeetCode
+>个人网站地址：http://www.zhoudl.top
+>CSDN地址：https://blog.csdn.net/ZBylant
+>微信公众号 ![微信公众号](http://images.zhoudl.top/WeChat_public_number/business_card_07.png)

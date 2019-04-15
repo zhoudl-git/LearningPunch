@@ -1,4 +1,0 @@
-###################  自定义项目配置 ###################
-xncoding:
-  socket-hostname: localhost
-  socket-port: 9096

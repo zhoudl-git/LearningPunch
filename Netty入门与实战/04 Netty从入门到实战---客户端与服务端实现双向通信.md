@@ -282,3 +282,5 @@ Sun May 26 13:21:14 CST 2019: 客户端读到数据 -> 你好，我是程序猿�
 - 写数据调用 `writeAndFlush()`方法；
 - 客户端和服务端交互的二级制数据载体为 `ByteBuf`,`ByteBuf`通过连接的内存管理器创建，字节数据只有填充到 `ByteBuf`之后才能写到对端。
 
+> 完整代码在 github 上 [使用 Netty 实现服务端和客户端双向通信](https://github.com/Bylant/LearningPunch/tree/master/Netty%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/netty-study/src/main/java/top/zhoudl/nettystudy/communication)
+

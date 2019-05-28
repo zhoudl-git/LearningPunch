@@ -359,3 +359,8 @@ public class PacketCodecTest {
 * 通信协议是为了客户端和服务端数据交互而双方协商出来的满足一定规则的二进制数据格式（我们自定义的协议本质上和 HTTP 协议是一致的，只不过我们自定义的属于私有协议，HTTP 属于公共协议）；
 * Java 对象的序列化，主要目的是为了实现 Java 对象与二进制数据的相互转换；
 * 了解编码和解码的过程；
+
+>  欢迎关注公众号 【程序猿杂货铺】获取更多干货内容
+
+> 完整代码在 github 上 [使用 Netty 实现服务端和客户端双向通信](https://github.com/Bylant/LearningPunch/tree/master/Netty%E5%85%A5%E9%97%A8%E4%B8%8E%E5%AE%9E%E6%88%98/netty-study/src/main/java/top/zhoudl/nettystudy/communication)
+

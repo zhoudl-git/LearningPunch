@@ -19,15 +19,21 @@ public class PacketCodec {
      */
     private static final int MAGIC_NUMBER = 0x12345678;
 
+    public static final PacketCodec INSTANCE = new PacketCodec();
+
     /**
      * 初始化 序列化算法 和 指令集
      */
-    private static final Map<Byte, Class<? extends Packet>> packetTypeMap;
-    private static final Map<Byte, Serializer> serializerMap;
+    private final Map<Byte, Class<? extends Packet>> packetTypeMap;
+    private final Map<Byte, Serializer> serializerMap;
 
-    static {
+    /**
+     * 单例
+     */
+    private PacketCodec() {
         packetTypeMap = new HashMap<>();
         packetTypeMap.put(Command.LOGIN_REQUEST, LoginRequestPacket.class);
+        packetTypeMap.put(Command.LOGIN_RESPONSE, LoginResponsePacket.class);
 
         serializerMap = new HashMap<>();
         Serializer serializer = new JSONSerializationImpl();
@@ -39,13 +45,13 @@ public class PacketCodec {
      * @param packet
      * @return
      */
-    public ByteBuf encode (Packet packet) {
+    public ByteBuf encode (ByteBufAllocator byteBufAllocator, Packet packet) {
 
         // 1. 构建 ByteBuf 对象
         // ioBuffer() 方法会返回适配 io 读写相关的内存，
         // 它会尽可能创建一个直接内存，
         // 直接内存可以理解为不受 jvm 堆管理的内存空间，写到 IO 缓冲区的效果更高。
-        ByteBuf byteBuf = ByteBufAllocator.DEFAULT.ioBuffer();
+        ByteBuf byteBuf = byteBufAllocator.ioBuffer();
         // 2. 序列化 packet 对象
         byte[] bytes = Serializer.DEFAULT.serialization(packet);
         // 3. 开始编码

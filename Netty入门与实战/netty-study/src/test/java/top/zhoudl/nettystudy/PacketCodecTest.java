@@ -1,6 +1,7 @@
 package top.zhoudl.nettystudy;
 
 import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
 import org.junit.Assert;
 import org.junit.Test;
 import top.zhoudl.nettystudy.protocol.command.LoginRequestPacket;
@@ -27,8 +28,9 @@ public class PacketCodecTest {
         loginRequestPacket.setUserName("zhoudl");
         loginRequestPacket.setPassword("pwd");
 
+
         PacketCodec packetCodec = new PacketCodec();
-        ByteBuf byteBuf = packetCodec.encode(loginRequestPacket);
+        ByteBuf byteBuf = packetCodec.encode(ByteBufAllocator.DEFAULT,loginRequestPacket);
         Packet decodedPacket = packetCodec.decode(byteBuf);
 
         Assert.assertArrayEquals(serializer.serialization(loginRequestPacket), serializer.serialization(decodedPacket));

@@ -393,3 +393,5 @@ P.S 提示一下，可以使用 hannel 的 attr() 方法来加一些特殊的标
 --------------------
 
 > 欢迎关注微信公众号 【程序猿杂货铺】，获取更多干货内容！
+
+> 完整代码 参考Github [Netty 从入门到实战](https://github.com/Bylant/LearningPunch)

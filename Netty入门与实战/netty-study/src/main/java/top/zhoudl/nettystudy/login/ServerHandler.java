@@ -3,10 +3,9 @@ package top.zhoudl.nettystudy.login;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import top.zhoudl.nettystudy.protocol.command.LoginRequestPacket;
-import top.zhoudl.nettystudy.protocol.command.LoginResponsePacket;
-import top.zhoudl.nettystudy.protocol.command.Packet;
-import top.zhoudl.nettystudy.protocol.command.PacketCodec;
+import io.netty.util.AttributeKey;
+import top.zhoudl.nettystudy.protocol.command.*;
+import top.zhoudl.nettystudy.util.LoginUtil;
 
 import java.util.Date;
 
@@ -19,7 +18,7 @@ public class ServerHandler  extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelRead(ChannelHandlerContext ctx, Object msg) {
-        System.out.println(new Date() + ": 客户端开始登录……");
+
         ByteBuf requestByteBuf = (ByteBuf) msg;
 
         Packet packet = PacketCodec.INSTANCE.decode(requestByteBuf);
@@ -40,6 +39,16 @@ public class ServerHandler  extends ChannelInboundHandlerAdapter {
             }
             // 登录响应
             ByteBuf responseByteBuf = PacketCodec.INSTANCE.encode(ctx.alloc(), loginResponsePacket);
+            ctx.channel().writeAndFlush(responseByteBuf);
+        } else if (packet instanceof MessageRequestPacket) {
+            // 处理消息
+            MessageRequestPacket messageRequestPacket = ((MessageRequestPacket) packet);
+
+            System.out.println(new Date() + ": 收到客户端消息: " + messageRequestPacket.getMessage());
+
+            MessageResposePacket messageResponsePacket = new MessageResposePacket();
+            messageResponsePacket.setMessage("服务端回复【" + messageRequestPacket.getMessage() + "】");
+            ByteBuf responseByteBuf = PacketCodec.INSTANCE.encode(ctx.alloc(), messageResponsePacket);
             ctx.channel().writeAndFlush(responseByteBuf);
         }
     }

@@ -3,10 +3,8 @@ package top.zhoudl.nettystudy.login;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import io.netty.channel.ChannelInboundHandlerAdapter;
-import top.zhoudl.nettystudy.protocol.command.LoginRequestPacket;
-import top.zhoudl.nettystudy.protocol.command.LoginResponsePacket;
-import top.zhoudl.nettystudy.protocol.command.Packet;
-import top.zhoudl.nettystudy.protocol.command.PacketCodec;
+import top.zhoudl.nettystudy.protocol.command.*;
+import top.zhoudl.nettystudy.util.LoginUtil;
 
 import java.util.Date;
 
@@ -15,7 +13,7 @@ import java.util.Date;
  * @date: 2019/5/29 15:55
  * @description:
  */
-public class ClientHandler  extends ChannelInboundHandlerAdapter {
+public class ClientHandler extends ChannelInboundHandlerAdapter {
 
     @Override
     public void channelActive(ChannelHandlerContext ctx) {
@@ -44,10 +42,16 @@ public class ClientHandler  extends ChannelInboundHandlerAdapter {
             LoginResponsePacket loginResponsePacket = (LoginResponsePacket) packet;
 
             if (loginResponsePacket.isSuccess()) {
+                // 标识该客户端已经登录
+                LoginUtil.markAsLogin(ctx.channel());
+
                 System.out.println(new Date() + ": 客户端登录成功");
             } else {
                 System.out.println(new Date() + ": 客户端登录失败，原因：" + loginResponsePacket.getReason());
             }
+        } else if (packet instanceof MessageResposePacket) {
+            MessageResposePacket messageResponsePacket = (MessageResposePacket) packet;
+            System.out.println(new Date() + ": 收到服务端消息: " + messageResponsePacket.getMessage());
         }
 
     }

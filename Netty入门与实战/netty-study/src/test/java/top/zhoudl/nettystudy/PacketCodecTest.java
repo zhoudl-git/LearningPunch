@@ -29,7 +29,7 @@ public class PacketCodecTest {
         loginRequestPacket.setPassword("pwd");
 
 
-        PacketCodec packetCodec = new PacketCodec();
+        PacketCodec packetCodec = PacketCodec.INSTANCE;
         ByteBuf byteBuf = packetCodec.encode(ByteBufAllocator.DEFAULT,loginRequestPacket);
         Packet decodedPacket = packetCodec.decode(byteBuf);
 

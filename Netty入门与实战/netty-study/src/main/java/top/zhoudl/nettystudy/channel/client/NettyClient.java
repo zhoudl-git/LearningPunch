@@ -1,4 +1,4 @@
-package top.zhoudl.nettystudy.login;
+package top.zhoudl.nettystudy.channel.client;
 
 import io.netty.bootstrap.Bootstrap;
 import io.netty.buffer.ByteBuf;
@@ -9,7 +9,6 @@ import io.netty.channel.ChannelOption;
 import io.netty.channel.nio.NioEventLoopGroup;
 import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
-import top.zhoudl.nettystudy.communication.FirstClientHandler;
 import top.zhoudl.nettystudy.protocol.command.MessageRequestPacket;
 import top.zhoudl.nettystudy.protocol.command.PacketCodec;
 import top.zhoudl.nettystudy.util.LoginUtil;
@@ -19,9 +18,7 @@ import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 
 /**
- * @Author zhoudl
- * @Date: 2019/5/26 10:57
- * @Description:
+ * @author 闪电侠
  */
 public class NettyClient {
     private static final int MAX_RETRY = 5;

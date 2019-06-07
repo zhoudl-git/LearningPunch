@@ -1,4 +1,4 @@
-package top.zhoudl.nettystudy.login;
+package top.zhoudl.nettystudy.channel.server;
 
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.ChannelInitializer;
@@ -10,11 +10,6 @@ import top.zhoudl.nettystudy.channel.server.handler.*;
 
 import java.util.Date;
 
-/**
- * @Author zhoudl
- * @Date: 2019/5/26 10:57
- * @Description:
- */
 public class NettyServer {
 
     private static final int PORT = 8000;

@@ -1,4 +1,4 @@
-package top.zhoudl.nettystudy.login;
+package top.zhoudl.nettystudy.channel.client;
 
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
@@ -7,12 +7,11 @@ import top.zhoudl.nettystudy.protocol.command.*;
 import top.zhoudl.nettystudy.util.LoginUtil;
 
 import java.util.Date;
-import java.util.UUID;
 
 /**
- * @author: zhoudongliang
- * @date: 2019/5/29 15:55
- * @description:
+ * @author chao.yu
+ * chao.yu@dianping.com
+ * @date 2018/08/04 06:23.
  */
 public class ClientHandler extends ChannelInboundHandlerAdapter {
     @Override
@@ -21,7 +20,7 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
 
         // 创建登录对象
         LoginRequestPacket loginRequestPacket = new LoginRequestPacket();
-        //loginRequestPacket.setUserId(UUID.randomUUID().toString());
+        loginRequestPacket.setUserId(1);
         //loginRequestPacket.setUsername("flash");
         loginRequestPacket.setPassword("pwd");
 
@@ -54,4 +53,3 @@ public class ClientHandler extends ChannelInboundHandlerAdapter {
         }
     }
 }
-

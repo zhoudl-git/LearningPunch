@@ -402,12 +402,13 @@ bind 127.0.0.1 只能本机访问
 master 选举
 
 1. 监控 master 和 slave 是否正常运行;
-
 2. 当 master 出现故障的时候，从 slave 中选举一个新的 master;
 
-sentinel
+sentinel ；raft 算法；
 
 ### Redis-Clluster
+
+数据分片 
 
 ### Redis 的实践应用
 

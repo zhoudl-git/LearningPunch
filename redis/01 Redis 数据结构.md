@@ -406,9 +406,108 @@ master 选举
 
 sentinel ；raft 算法；
 
-### Redis-Clluster
+### Redis-Cluster
+
+TODO 不是很了解，还需要学习；
 
 数据分片 
 
+3 台 slave , 3 台 master 保证高可用
+
+拓扑图 ： 基于 gossip 协议的无中心化节点的集群1123
+
+TODO 2019-07-15
+
+多个虚拟槽，数据会随机（CRC16）落在某个槽上
+
+#### 分片迁移
+
 ### Redis 的实践应用
 
+#### 分布式锁
+
+多线程中的一些锁：synchronized、Lock ；
+
+多进程中我们需要分布式锁，比如库存扣减操作；
+
+##### zk 
+
+节点的唯一性和有序性去实现；
+
+##### redis 
+
+使用 setnx 指令的特性去实现分布式锁；
+
+获得锁，释放锁，超时时间，判断是否重入；
+
+```JAVA
+public class JedisConnectUtils {
+    private static JdeisPool pool = null;
+static {
+    JdeisPoolConfig jedisPoolConfig = new JdeisPoolConfig();
+    jedisPoolConfig.setMaxTotal(100);
+    pool = new JedisPool(jedisPoolConfig,"192.168.11.153",6379);
+}   
+}
+
+
+public class DistributeLock{
+    // 获得锁
+    // 锁名称 获得锁的超时时间 锁本身的过期时间
+    public String acquireLock(String lockName,long acquireTimeout,long lockTimeout,){
+        // 保证释放锁的时候是同一个持有锁的人
+        String identify = UUID.rendomUUID().toString();
+        String lockKey = "lock:" + lockName;
+        int lockExpire = (int)(lockTimeout/1000);
+        Jedis jedis = null;
+        jedis = JedisConnectionUtils.getJdeis();
+        long end = System.currentTimeMills() + acquireTimeout
+            // 获取锁的限定时间
+        while(System.currentTimeMills() < end) {
+            if(jedis.setnx(lockKey,identify)==1){
+                // 设置成功，获得锁
+               // 设置超时时间
+                jedis.expire(lockKey,lockExpire);
+                // 获取锁成功
+                return identify;
+                
+            }
+            // 说明没有设置超时时间
+            if(jedis.ttl(lockKey) == -1) {
+                 jedis.expire(lockKey,lockExpire);
+            }
+            try {
+                // 等待片刻后进行获取锁的重试
+                // 因为立即重试没有任何意义
+                Thread.sleep(100);
+            } catch{
+                e.printStackTrace();
+            } 
+        }
+        finally {
+            jedis.close();
+        }
+    }
+    // 释放锁
+}
+```
+
+结合 Lua 脚本保证释放锁的原子性
+
+```Lua
+if redis.call(\"get\",KEYS[1]) == ARGC[1]  then 
+    return redis.call(\"del\",KEYS[1])
+else return 0 end;
+```
+
+使用 redisson 的 tryLock 
+
+#### 管道 Pipeline
+
+单机模式下，可以提高性能；
+
+主要性能瓶颈在网络消耗上，可以使用管道来提高性能；
+
+### Redis 应用过程中的一些问题
+
+34:03

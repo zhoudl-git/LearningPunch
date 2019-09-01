@@ -103,7 +103,7 @@ git push -f origin master
 
 ###### merge
 
-* 本地开发分支直接合并到远端 master ，review 之后再合并到 master 分支，这样本地 master 可以保证最干净，否则有可能带一些污染代码到中央库
+* 本地开发分支直接合并到远端 master ，review 之后再合并到 master 分支，这样本-地 master 可以保证最干净，否则有可能带一些污染代码到中央库
 
 * 冲突解决：
 
@@ -154,3 +154,23 @@ release 发布
 ### git hooks
 
 http://t.guahao.cn/jaaE3i
+
+
+
+------
+
+2019-09-01
+
+-------
+
+相关命令：
+
+### git status 
+
+* 红色：代表文件还没有被 git 管理
+
+* git -help status : 查看 git status 的具体用法
+* 绿色 ：代表文件存在于缓存区中
+
+
+

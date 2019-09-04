@@ -93,7 +93,7 @@ public class MainTest {
 
 运行结果
 
-![mapstruct 运行结果](\images\mapstruct 运行结果.png)
+![mapstruct 运行结果](assets/mapstruct 运行结果.png)
 
 上边的代码或许暂时看起来还是比较简洁的，但是我们需要注意的一点就是平时业务开发中的对象属性远不是上述代码中简简单单的几个字段，有可能会有数十个字段，同理也会数十个对象需要转换，我们如果还是通过 getter、setter 的方式把一个对象属性值复制到另一个对象中去还是非常麻烦的，不过不用担心，今天要介绍给大家的 MapStruct 就是用于解决这种问题的。
 
@@ -212,7 +212,7 @@ public interface UserRoleMapper {
 
 然后我们运行程序就可以得到自己想要的结果了
 
-![mapstruct 运行结果](\images\mapstruct 运行结果.png)
+![mapstruct 运行结果](assets/mapstruct 运行结果.png)
 
 #### 安装 MapStruct 插件
 
@@ -226,7 +226,7 @@ public interface UserRoleMapper {
 
 然后在 Markeyplace 搜索框中输入 mapstruct，点击 install，然后重启 IDE 即可。
 
-![mapstruct 安装过程](\images\mapstruct 安装过程.png)
+![mapstruct 安装过程](assets/mapstruct 安装过程.png)
 
 #### 一些可能会出现的问题
 
@@ -238,7 +238,7 @@ public interface UserRoleMapper {
 
 - 使用 Lombok 的情况下，编译时报 Data 类的 setter/getter 找不到：把 lombok 加入到annotationProcessorPath，如下图 
 
-  ![mapstruct 引入 lombok 编译器](\images\mapstruct 引入 lombok 编译器.png)
+  ![mapstruct 引入 lombok 编译器](assets/mapstruct 引入 lombok 编译器.png)
 
 ### 总结
 
